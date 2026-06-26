@@ -96,7 +96,8 @@
 
 - Apply the Argo CD manifest:
   ```bash
-  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  kubectl apply -n argocd --server-side --force-conflicts \
+  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   ```
 
 - Check services in Argo CD namespace:
@@ -129,12 +130,14 @@
 
 - Deploy Kubernetes dashboard:
   ```bash
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard \
+  --create-namespace --namespace kubernetes-dashboard
   ```
 
-- Create a token for dashboard access:
+- Access dashboard access:
   ```bash
-  kubectl -n kubernetes-dashboard create token admin-user
+kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443 --address=0.0.0.0 &
   ```
 
 ---
