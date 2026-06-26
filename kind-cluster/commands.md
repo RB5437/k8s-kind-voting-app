@@ -130,14 +130,12 @@
 
 - Deploy Kubernetes dashboard:
   ```bash
-  helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-  helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard \
-  --create-namespace --namespace kubernetes-dashboard
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
   ```
 
-- Access dashboard access:
+- Create a token for dashboard access:
   ```bash
-   kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443 --address=0.0.0.0 &
+   kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml 
   ```
 
 ---
