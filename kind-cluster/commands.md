@@ -137,7 +137,7 @@
 
 - Access dashboard access:
   ```bash
-  kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443 --address=0.0.0.0 &
+   kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443 --address=0.0.0.0 &
   ```
 
 ---
@@ -146,7 +146,7 @@
 
 - Retrieve Argo CD admin password:
   ```bash
-  kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+   kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
   ```
 
 
